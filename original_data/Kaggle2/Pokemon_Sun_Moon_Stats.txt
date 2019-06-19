@@ -1,0 +1,13 @@
+Pokemon Sun and Moon (Gen 7) Stats by Miles O'Neill
+
+Pokemon Sun and Moon (released November 18th, 2016) are the latest games in the widely popular Pokemon video game franchise. Pokemon games are usually released in pairs (red and blue, gold and silver, x and y, etc.) and collectively each pair that introduces new pokemon to the game is known as a Generation. Pokemon Sun and Moon are the 7th Generation, adding new pokemon to the franchise as well as adjusting the stats and movesets of some of the older pokemon. (Please note that the recently popular PokemonGo games are unrelated to the Pokemon Video Games).
+
+This dataset contains a full set of in-game statistics for all 802 pokemon in the Sun and Moon. It also includes full information on which pokemon can learn which moves (movesets.csv), what moves can do (moves.csv), and how damage is modified by pokemon type (type-chart.csv).
+
+Pokemon Battle Simulation
+
+With the level of detail in the data provided here it is possible to almost fully simulate pokemon battles using the information provided (status effects and some other nuances are still missing). If you are interested in simulating how Pokemon battles would pan out between different opponents make sure to read up on the math behind how Pokemon battles work.
+
+[NOT PASTABLE LATEX HERE]
+
+[Copy and pasted from https://www.kaggle.com/mylesoneill/pokemon-sun-and-moon-gen-7-stats on 06/18/19]
