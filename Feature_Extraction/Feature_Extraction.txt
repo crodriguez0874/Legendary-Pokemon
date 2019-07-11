@@ -1,0 +1,76 @@
+Pokemon Legendary Analysis - Feature Extraction
+
+Christian Rodriguez
+crodriguez0874@gmail.com
+07/10/19
+
+In Feature_Extraction.py, we try multiple dimension reduction methods on the 
+base stats of the pokemon (HP, Attack, Sp. Attack, Defense, Sp. Defense, Speed)
+to project the data into spaces where it is more linearly seperable. The
+methods implemented are PCA, polynomial-kernal PCA, RBF-kernal PCA,
+Cosine-kernal PCA, and Isomap. 6 dimensions is certainly not too much to work
+with, but there may be some structure in the data that can be pronounced via
+PCA and non-linear projections.
+
+Prior to applying the dimension reduction methods, we made sure to standardize
+the data via min-max (x_i - min(x)/max(x)). The distributions of base stats
+can be pretty different when comparing them to one another. For PCA and the
+kernal PCAs, we plotted a variation of screeplots (displays the percentage of
+variance by using up to the nth component), a projecting of the data in 2
+dimensions, and a projection of the data in 3 dimensions. Also, the parameters
+for each dimension reduction method was chosen via grid search and observing
+which set of parameters best results in the data being linearly seperable in 
+3 dimensions. Through graphics alone, the projections are really interesting!
+It does not look like the data is perfectly linearly separated, but the data
+takes on interesting geometrics shapes for each projection. I believe they are
+all worthwhile to consider as potential predictors. The sets of features worth
+considering in lieu of the original set of base stats features are:
+    
+* Total Aggregation - Add up all six base stats into one variable.
+
+* Offensive/Defensive Aggregation - Add up HP, Defense, and Sp. Defense into 
+one feature, and add up Attack, Sp. Attack, and Speed into another.
+    
+* PCA - The first 3 PC components.
+
+* Polynomial-Kernal PCA - The first 3 PC components.
+
+* RBF-Kernal PCA - The first 25 PC components.
+
+* Cosine-Kernal PCA - The first 4 PC components.
+
+*** The number of components chosen to use for PCA and the kernal PCAs was
+determined by observing the elbow in the screeplot (approximate point
+where the local maximum of variation explained). ***
+
+* Isomap - Use the first 3 dimensions from the isomapping.
+
+The outline for the rest of the analysis will be as follows:
+
+1) Create the different sets of features. From the sets describes before,
+we should have 8 (the 7 listed before, and +1 for the original data) data
+sets.
+
+2) Create a validation set, where the data sets' validation sets
+have the same observations but different features.
+
+3) For each data set, tune the best predictor on the data.
+
+4) Compare the best predictors for each data set, and choose
+the most accurate predictor.
+
+Step 1) will be the next milestone (predictions prepartion), and the rest
+will be lumped into the predictions milestone. Please incorporate some
+automation to ensure we are not doing the same work over and over. Also,
+make sure to scale the test data using the maximums/minimums from the 
+training data. Next, should do some prediction preparation where we for
+each set of features.
+
+Generally, all our prediction models will include: [set of base stats features]
++ [height & weight] + [gender]. As we observed in the EDA, legendary pokemon
+tend to be genderless. So, gender will most likely be a powerful predictor for
+our models. Therefore, we will only consider models that accept factor features
+as predictors. We could also try to think of more feature extraction methods for
+type, weaknesses, moveset, or even a text analysis for the description of a
+pokemon, but that is excessive considering our analysis will not have a significant
+impact (outside of its inquisitive nature). 

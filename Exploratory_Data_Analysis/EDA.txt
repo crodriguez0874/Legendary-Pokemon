@@ -6,17 +6,38 @@ crodriguez0874@gmail.com
 
 Hi,
 
-In this section of the analysis we conduct some exploratory data analysis through summary statistics and data visualization. EDA is quick and easy, so the more of it the better. The EDA is conducted via Python.
+In this section of the analysis we conduct some exploratory data analysis
+through summary statistics and data visualization. EDA is quick and easy, so
+the more of it the better. The EDA is conducted via Python.
 
-EDA_data_visuals.py produces graphics including a scatterplot of height vs weight, barplots of genders, and probability distributions of their base stats. There are a couple of noteworthy findings:
+EDA_data_visuals.py produces graphics including a scatterplot of height vs
+weight, barplots of genders, and probability distributions of their base stats.
+There are a couple of noteworthy findings:
 
-1) Legendary pokemon tend to have greater base stats all around, but it may be a better idea to generate new features that are aggregates of these stats. Should consider differentiating between total, offensive, and defensive stats. Dimension reduction methods may offer interesting features.
+1) Legendary pokemon tend to have greater base stats all around, but it may be
+a better idea to generate new features that are aggregates of these stats.
+Should consider differentiating between total, offensive, and defensive stats.
+Dimension reduction methods may offer interesting features.
 
-2) The majority of the legendary pokemon are genderless. Tree-based methods may prevail as the most powerful models if they use gender and consider 'No gender' as a level of the categorical feature.
+2) The majority of the legendary pokemon are genderless. Tree-based methods may
+prevail as the most powerful models if they use gender and consider 'No gender'
+as a level of the categorical feature.
 
-3) Through the straight forward scatterplot of height vs weight, we find that the legendary and non-legendary pokemon are not linearly seperable. It may be just be two variables, but perhaps PCA or kernal PCA can offer new insight.
+3) Through the straight forward scatterplot of height vs weight, we find that
+the legendary and non-legendary pokemon are not linearly seperable.
 
-EDA_summ_stats.py produces summary statistics of the the listed features. There is not much additional insight that the graphics have not highlighted, but we find that Arceus is one of the most common pokemon. 71 of the 650 legendary pokemon are Arceus. This should be expected considering Arceus has a forme for every type and the data generation process. Should think about whether or not to cut down on the number of Arceus's in the data set to make sure the model does not overfit on Arceus's. A model that is good at predicting legendaries will correctly classify Arceus as legendary, but a model good at classifying Arceus's as legendary will not necessarily be good at pokemon other pokemon as legendaries. Also, approximately 10.83% of the pokemon in the training set are legendary. Lastly, 127 of the legendary pokemon are psychic - maybe I should consider making a boolean for whether or not psychic.
+EDA_summ_stats.py produces summary statistics of the the listed features. There
+is not much additional insight that the graphics have not highlighted, but we
+find that Arceus is one of the most common pokemon. 71 of the 650 legendary
+pokemon are Arceus. This should be expected considering Arceus has a forme
+for every type and the data generation process. Should think about whether or
+not to cut down on the number of Arceus's in the data set to make sure the
+model does not overfit on Arceus's. A model that is good at predicting legendaries
+will correctly classify Arceus as legendary, but a model good at classifying
+Arceus's as legendary will not necessarily be good at pokemon other pokemon as
+legendaries. Also, approximately 10.83% of the pokemon in the training set are
+legendary. Lastly, 127 of the legendary pokemon are psychic - maybe I should
+consider making a boolean for whether or not psychic.
 
 
 

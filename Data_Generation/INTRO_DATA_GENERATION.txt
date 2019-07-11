@@ -6,43 +6,89 @@ crodriguez0874@gmail.com
 
 Hi,
 
-This analysis was inspired by a conversation with my friend (Soyoung Luna), and several other data scientist on Kaggle and DataCamp. The idea to do a prediction analyis comes from Joshua Feldman on https://www.datacamp.com/projects/712, but the direction of the analysis, methods, and code are all originally mine. I used datasets provided by Kaggle users Miles O'Neill (Pokemon Sun and Moon (Gen 7) Stats) and  Rounak Banik (The Complete Pokemon Dataset).
+This analysis was inspired by a conversation with my friend (Soyoung Luna), and
+several other data scientist on Kaggle and DataCamp. The idea to do a
+prediction analyis comes from Joshua Feldman on
+https://www.datacamp.com/projects/712, but the direction of the analysis,
+methods, and code are all originally mine. I used datasets provided by Kaggle
+users Miles O'Neill (Pokemon Sun and Moon (Gen 7) Stats) and
+Rounak Banik (The Complete Pokemon Dataset).
 
-Originally, I was going to use The Complete Pokemon Dataset to predict whether a pokemon is legendary or not among the first 802 pokemon. After digging into the data provided, I realized that using all of the info as presented would have been too easy. There is certain information scraped that makes the legendary status almost too easy to predict. Such information is number of egg steps, expierence growth, and capture rate. However, that is data hidden in the video game's code. After think about it a little bit, I came up with the idea to mimic the data generation process in the video games (as of generation 7 06/18/19) as close as possible and use only data provided by the pokedex from the video game. This schema adds a little randomization and sparsity, thus making the analysis more interesting. The data generation process primarily uses the Pokemon Sun and Moon (Gen 7) Stats dataset, and The Complete Pokemon Dataset for the legendary status of a pokemon.
+Originally, I was going to use The Complete Pokemon Dataset to predict whether
+a pokemon is legendary or not among the first 802 pokemon. After digging into
+the data provided, I realized that using all of the info as presented would
+have been too easy. There is certain information scraped that makes the
+legendary status almost too easy to predict. Such information is number of egg
+steps, expierence growth, and capture rate. However, that is data hidden in the
+video game's code. After think about it a little bit, I came up with the idea
+to mimic the data generation process in the video games
+(as of generation 7 06/18/19) as close as possible and use only data provided
+by the pokedex from the video game. This schema adds a little randomization and
+sparsity, thus making the analysis more interesting. The data generation
+process primarily uses the Pokemon Sun and Moon (Gen 7) Stats dataset, and The
+Complete Pokemon Dataset for the legendary status of a pokemon.
 
 The set up of the generation process is as follows:
 
 + We will draw 6000 pokemon for a training set, and 4000 for a test set.
 
-+ There are 809 unique pokemon, but 1098 after considering unique variations too (such as mega-evolutions, fusions, primal forms, and etc.).
++ There are 809 unique pokemon, but 1098 after considering unique variations
+too (such as mega-evolutions, fusions, primal forms, and etc.).
 
 + Each of the 1098 pokemon may be drawn with equal probability and replacement.
 
-+ For each pokemon, we will have information on its legendary status, pokedex number, species (name), forme, types, nature, stats (attack, sp. attack. defense sp. defense, HP, speed), gender, height, weight, moveset, and ability. I would have included pokemon description as well, but that was not possible with the data set provided by Miles.
++ For each pokemon, we will have information on its legendary status, pokedex
+number, species (name), forme, types, nature, stats (attack, sp. attack, 
+defense, sp. defense, HP, speed), gender, height, weight, moveset, and ability.
+I would have included pokemon description as well, but that was not possible
+with the data set provided by Miles.
 
 + Pokemon drawn will always be Lv. 100.
 
-+ I will mimic the IV (individual values) process that goes into the base stats of a pokemon. For each non-legendary pokemon, they may recieve a stat bonus between 0-31 for each of their six base stats. Each number between 0-31 is just as likely to occur. Legendary pokemon follow a similar process, but they are guranteed 3 stats that will receive a maximum 31 bonus.
++ I will mimic the IV (individual values) process that goes into the base stats
+of a pokemon. For each non-legendary pokemon, they may recieve a stat bonus
+between 0-31 for each of their six base stats. Each number between 0-31 is just
+as likely to occur. Legendary pokemon follow a similar process, but they are
+guranteed 3 stats that will receive a maximum 31 bonus.
 
-+ EV (effor values) are assumed to be 0 since that involves the trainer after the capture the pokemon and train it.
++ EV (effor values) are assumed to be 0 since that involves the trainer after
+the capture the pokemon and train it.
 
-+ Moveset is determined by the final four moves the pokemon learn by leveling up. This is holds true in the video game (according to bulbapedia).
++ Moveset is determined by the final four moves the pokemon learn by leveling
+up. This is holds true in the video game (according to bulbapedia).
 
-+ There are 25 unique natures that may have an additional affect on the pokemon's base stats. Some natures have no affect on the pokemon's base stats. The ones that do give a 10% boost to one stat and decrease another stat by 10%. A pokemon is equally likely to have each of the 25 natures.
++ There are 25 unique natures that may have an additional affect on the
+pokemon's base stats. Some natures have no affect on the pokemon's base stats.
+The ones that do give a 10% boost to one stat and decrease another stat by 10%.
+A pokemon is equally likely to have each of the 25 natures.
 
-+ When caught, a pokemon is allowed to have one of 2 abilities or its hidden abilities. We will assume the pokemon is equally likely to have one of the three.
++ When caught, a pokemon is allowed to have one of 2 abilities or its hidden
+abilities. We will assume the pokemon is equally likely to have one of the
+three.
 
-+ For each pokemon drawn, I will determine their weight by sampling from a normal distribution where the mean is the listed weight in the dataset and the variance is 10% of the listed weight. The same process applies to each pokemon's height.
++ For each pokemon drawn, I will determine their weight by sampling from a
+normal distribution where the mean is the listed weight in the dataset and the
+variance is 10% of the listed weight. The same process applies to each
+pokemon's height.
 
-+ Gender is determined by a bernoulli trial using the male percentage (provided by Miles' data) rate.
++ Gender is determined by a bernoulli trial using the male percentage
+(provided by Miles' data) rate.
 
-NOTE: In this analysis, we are not allowed to reverse engineer the pokemon's stats to get the base stats. In our predictions and EDA We will assume we know of the nature's advantages/disadvantages, but do not know the precise mathematical formula. That would make things too easy.
+NOTE: In this analysis, we are not allowed to reverse engineer the pokemon's
+stats to get the base stats. In our predictions and EDA We will assume we know
+of the nature's advantages/disadvantages, but do not know the precise
+mathematical formula. That would make things too easy.
 
-NOTE: Let's say we caught two pikachus of the same formes. Call them Pikachu A and Pikachu B. A and B will have the same pokedex number, species, forme, types, and moveset. By the randomization in the generation process, they may have difference height, weight, abilities, gender, and stats.
+NOTE: Let's say we caught two pikachus of the same formes. Call them Pikachu
+A and Pikachu B. A and B will have the same pokedex number, species, forme,
+types, and moveset. By the randomization in the generation process, they may
+have difference height, weight, abilities, gender, and stats.
 
-The goal of our analysis is to create a model that can predict a pokemon's legendary status, understand which features are highly indicative of legendary status, and determine which of the applied models performs best in predictions.
+The goal of our analysis is to create a model that can predict a pokemon's
+legendary status, understand which features are highly indicative of legendary
+status, and determine which of the applied models performs best in predictions.
 
-The outline of the analysis is as follows:
+The outline of the analysis is as follows (subject to change):
 
 + Data Generation
 
