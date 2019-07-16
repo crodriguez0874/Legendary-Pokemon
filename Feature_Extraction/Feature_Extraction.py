@@ -4,7 +4,7 @@ Feature Extraction
 
 Christian Rodriguez
 crodriguez0874@gmail.com
-06/20/19
+07/10/19
 
 Summary - In this script, we try multiple dimension reduction methods on the 
 base stats of the pokemon (HP, Attack, Sp. Attack, Defense, Sp. Defense,
