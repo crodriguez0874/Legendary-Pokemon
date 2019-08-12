@@ -418,3 +418,9 @@ ax.set_xlabel('1D', fontweight='bold')
 ax.set_ylabel('2D', fontweight='bold')
 ax.set_zlabel('3D', fontweight='bold')
 ax.legend(loc='best', bbox_to_anchor= (-0.25, 0.40, 0.5,0.5))
+
+###PCA - use first three
+###Poly KPCA - use first four
+###RBF KPCA - use first thirty
+###Cosine - use first five
+###Isomap - use all three

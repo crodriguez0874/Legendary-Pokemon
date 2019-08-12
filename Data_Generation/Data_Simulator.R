@@ -155,11 +155,18 @@ pokemon2$Move.3[exceptions[3]] <- 'Psychic'
 pokemon2$Move.4[exceptions[3]] <- 'Hyperspace Hole'
 
 ################################################################################
+###Taking care of Arceus
+################################################################################
+
+Arceues_dupes <- (pokemon2$species == 'Arceus' & pokemon2$type1 != 'Normal')
+pokemon2 <- pokemon2[!Arceues_dupes ,]
+
+################################################################################
 ###Simulating data, and outputting a training and test set.
 ################################################################################
 
-training_set <- pokemon_simulator(6000)
-test_set <- pokemon_simulator(4000)
+training_set <- pokemon_simulator(800)
+test_set <- pokemon_simulator(400)
 
 write.csv(x=training_set, file='pokemon_training.csv', row.names=FALSE)
 write.csv(x=test_set, file='pokemon_test.csv', row.names=FALSE)

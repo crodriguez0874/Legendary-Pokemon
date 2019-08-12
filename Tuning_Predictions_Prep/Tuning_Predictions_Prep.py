@@ -215,52 +215,52 @@ test_data_writer(test_not_basestats,
 ###Polynomial-Kernal PCA Data
 ###############################################################################
 
-poly_KPCA_cnames = list(training_not_basestats.columns) + FeatExt.basestats_kpca_poly_column_names[:3]
+poly_KPCA_cnames = list(training_not_basestats.columns) + FeatExt.basestats_kpca_poly_column_names[:4]
 data_writer(training_not_basestats,
             FeatExt.basestats_kPCscores_poly,
             poly_KPCA_cnames,
             'poly_KPCA_training',
-            3)
+            4)
 
 test_data_writer(test_not_basestats,
                  test_basestats_scaled,
                  FeatExt.basestats_kpca_poly,
                  'poly_KPCA_test',
-                 3)
+                 4)
 
 ###############################################################################
 ###RBF-Kernal PCA Data
 ###############################################################################
 
-RBF_KPCA_cnames = list(training_not_basestats.columns) + FeatExt.basestats_kpca_RBF_column_names[:25]
+RBF_KPCA_cnames = list(training_not_basestats.columns) + FeatExt.basestats_kpca_RBF_column_names[:30]
 data_writer(training_not_basestats,
             FeatExt.basestats_kPCscores_RBF,
             RBF_KPCA_cnames,
             'RBF_KPCA_training',
-            25)
+            30)
 
 test_data_writer(test_not_basestats,
                  test_basestats_scaled,
                  FeatExt.basestats_kpca_RBF,
                  'RBF_KPCA_test',
-                 25)
+                 30)
 
 ###############################################################################
 ###Cosine-Kernal PCA Data
 ###############################################################################
 
-cosine_KPCA_cnames = list(training_not_basestats.columns) + FeatExt.basestats_kpca_cosine_column_names[:4]
+cosine_KPCA_cnames = list(training_not_basestats.columns) + FeatExt.basestats_kpca_cosine_column_names[:5]
 data_writer(training_not_basestats,
             FeatExt.basestats_kPCscores_cosine,
             cosine_KPCA_cnames,
             'cosine_KPCA_training',
-            4)
+            5)
 
 test_data_writer(test_not_basestats,
                  test_basestats_scaled,
                  FeatExt.basestats_kpca_cosine,
                  'cosine_KPCA_test',
-                 4)
+                 5)
 
 ###############################################################################
 ###Isomap Data
